@@ -1213,7 +1213,6 @@ PVRMMap(struct file* pFile, struct vm_area_struct* ps_vma)
     PVR_DPF((PVR_DBG_MESSAGE, "%s: Mapped psLinuxMemArea 0x%p\n",
          __FUNCTION__, psOffsetStruct->psLinuxMemArea));
 
-    ps_vma->vm_flags |= VM_RESERVED;
     ps_vma->vm_flags |= VM_IO;
 
     /*
@@ -1221,6 +1220,7 @@ PVRMMap(struct file* pFile, struct vm_area_struct* ps_vma)
      * page requests have already been validated.
      */
     ps_vma->vm_flags |= VM_DONTEXPAND;
+    ps_vma->vm_flags |= VM_DONTDUMP;
     
     /* Don't allow mapping to be inherited across a process fork */
     ps_vma->vm_flags |= VM_DONTCOPY;
